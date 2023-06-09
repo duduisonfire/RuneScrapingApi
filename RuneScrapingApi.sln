@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{11B250D8-67D2-4AE8-9399-1806224816B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunesWebScraping", "RunesWebScraping\RunesWebScraping.csproj", "{8095A156-255C-48B4-B39D-70D003B50EDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B7B5FA1-EAE0-420D-8332-5C64AE68FD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B7B5FA1-EAE0-420D-8332-5C64AE68FD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B7B5FA1-EAE0-420D-8332-5C64AE68FD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B7B5FA1-EAE0-420D-8332-5C64AE68FD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11B250D8-67D2-4AE8-9399-1806224816B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11B250D8-67D2-4AE8-9399-1806224816B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11B250D8-67D2-4AE8-9399-1806224816B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11B250D8-67D2-4AE8-9399-1806224816B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8095A156-255C-48B4-B39D-70D003B50EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8095A156-255C-48B4-B39D-70D003B50EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8095A156-255C-48B4-B39D-70D003B50EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8095A156-255C-48B4-B39D-70D003B50EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
