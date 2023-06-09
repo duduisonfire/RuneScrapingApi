@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RunesWebScraping.domain;
 
 namespace RunesWebScraping.controllers
 {
@@ -7,9 +8,11 @@ namespace RunesWebScraping.controllers
     public class UggRunes : Controller
     {
         [HttpGet]
-        public string GetRunes()
+        public async Task<string> GetRunes()
         {
-            var testString = "Essa string é um teste.";
+            var lolApi = new LolApi();
+
+            var testString = await lolApi.GetLolVersion();
 
             return testString;
         }
