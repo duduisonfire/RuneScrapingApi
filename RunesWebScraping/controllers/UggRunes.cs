@@ -8,11 +8,11 @@ namespace RunesWebScraping.controllers
     public class UggRunes : Controller
     {
         [HttpGet]
-        public async Task<string> GetRunes()
+        public async Task<List<string>> GetRunes()
         {
             var lolApi = new LolApi();
 
-            var testString = await lolApi.GetLolVersion();
+            var testString = await lolApi.GetChampionList();
 
             return testString;
         }

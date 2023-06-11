@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using RunesWebScraping.domain.classes;
 
 namespace RunesWebScraping.domain
 {
@@ -13,8 +14,8 @@ namespace RunesWebScraping.domain
                     "https://ddragon.leagueoflegends.com/api/versions.json"
                 );
                 var content = res.Content;
-                var stringData = await content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<List<string>>(stringData);
+                var dataInString = await content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<List<string>>(dataInString);
 
                 if (data != null)
                 {
@@ -25,7 +26,34 @@ namespace RunesWebScraping.domain
             }
             catch (Exception e)
             {
-                return e.ToString();
+                Console.WriteLine(e.Message);
+                return e.Message;
+            }
+        }
+
+        public async Task<List<string>> GetChampionList()
+        {
+            try {
+            var lolVersion = await GetLolVersion();
+            var client = new HttpClient();
+            var res = await client.GetAsync(
+                $"https://ddragon.leagueoflegends.com/cdn/{lolVersion}/data/en_US/champion.json"
+            );
+            var content = res.Content;
+            var dataInString = await content.ReadAsStringAsync();
+            var championsData = JsonConvert.DeserializeObject<ChampionObject>(dataInString);
+            var championList = championsData!.data.Keys.ToList();
+            
+            return championList;
+            } catch (Exception e) {
+                Console.WriteLine(e);
+
+                var errorList = new List<string>
+                {
+                    e.Message
+                };
+
+                return errorList;
             }
         }
     }
