@@ -2,7 +2,7 @@ namespace RunesWebScraping.domain
 {
     public class RunesParseTable
     {
-        public static readonly Dictionary<string, int> ParseTable =
+        public static readonly Dictionary<string, int> table =
             new()
             {
                 { "Precision", 8000 },
