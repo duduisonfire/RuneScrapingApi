@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using RunesWebScraping.application;
-using RunesWebScraping.domain;
 
 namespace RunesWebScraping.controllers
 {
