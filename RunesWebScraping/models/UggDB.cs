@@ -13,19 +13,19 @@ namespace RunesWebScraping.models
         public string? Id { get; set; }
 
         [BsonElement("champion")]
-        public string? Champion { get; set; }
+        public string Champion { get; set; }
 
         [BsonElement("lane")]
-        public string? Lane { get; set; }
+        public string Lane { get; set; }
 
         [BsonElement("runes")]
-        public List<string>? Runes { get; set; }
+        public List<string> Runes { get; set; }
 
         [BsonElement("runesId")]
-        public RunePage? RunesId { get; set; }
+        public RunePage RunesId { get; set; }
 
         [BsonElement("createdAt")]
-        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public UggDB(RuneResponse response)
         {
