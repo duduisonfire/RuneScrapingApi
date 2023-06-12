@@ -6,22 +6,23 @@ namespace RunesWebScraping.domain
     public class RunePage : IRunePage
     {
         [BsonElement("primaryStyleId")]
-        public int primaryStyleId { get; }
+        public int PrimaryStyleId { get; set;}
 
         [BsonElement("subStyleId")]
-        public int subStyleId { get; }
+        public int SubStyleId { get; set;}
 
         [BsonElement("selectedPerkIds")]
-        public int[] selectedPerkIds { get; } = {};
+        public List<int> SelectedPerkIds { get; set;}
 
         public RunePage(List<string> runes)
         {
-            primaryStyleId = RunesParseTable.table[runes[0]];
-            subStyleId = RunesParseTable.table[runes[1]];
+            SelectedPerkIds = new();
+            PrimaryStyleId = RunesParseTable.table[runes[0]];
+            SubStyleId = RunesParseTable.table[runes[1]];
 
             for (int i = 2; i < 11; i++)
             {
-                selectedPerkIds.Append(RunesParseTable.table[runes[i]]);
+                SelectedPerkIds.Add(RunesParseTable.table[runes[i]]);
             }
         }
     }

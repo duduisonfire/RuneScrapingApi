@@ -21,19 +21,17 @@ namespace RunesWebScraping.controllers
         [HttpGet]
         public async Task<UggDB> GetRunes()
         {
-            var championCache = await _uggDbService!.ChampionCacheExists("ahri", "mid");
+            var championCache = await _uggDbService!.ChampionCacheExists("aatrox", "top");
 
             if (championCache == null)
             {
-                var webScrap = new RuneWebScrap("ahri", "mid");
+                var webScrap = new RuneWebScrap("aatrox", "top");
                 await webScrap.GetRunes();
                 var runesId = new RunePage(webScrap.runeList.ToList());
                 var runeResponse = new RuneResponse(webScrap, runesId);
                 championCache = await _uggDbService.CreateChampionCache(runeResponse);
             }
 
-            // var webScrap = new RuneWebScrap("ahri", "mid");
-            // await webScrap.GetRunes();
             return championCache;
         }
     }

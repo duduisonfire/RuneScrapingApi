@@ -2,8 +2,8 @@ namespace RunesWebScraping.domain.interfaces
 {
     public interface IRunePage
     {
-        int primaryStyleId { get; }
-        int subStyleId { get; }
-        int[] selectedPerkIds { get; }
+        int PrimaryStyleId { get; }
+        int SubStyleId { get; }
+        List<int> SelectedPerkIds { get; }
     }
 }
