@@ -16,13 +16,9 @@ namespace RunesWebScraping.domain
                 var content = res.Content;
                 var dataInString = await content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<List<string>>(dataInString);
+                var lolVersion = data != null ? data[0] : "";
 
-                if (data != null)
-                {
-                    return data[0];
-                }
-
-                return "";
+                return lolVersion;
             }
             catch (Exception e)
             {

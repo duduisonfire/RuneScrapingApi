@@ -4,6 +4,6 @@ namespace RunesWebScraping.domain.interfaces
     {
         int primaryStyleId { get; }
         int subStyleId { get; }
-        List<int> selectedPerksIds { get; }
+        int[] selectedPerkIds { get; }
     }
 }

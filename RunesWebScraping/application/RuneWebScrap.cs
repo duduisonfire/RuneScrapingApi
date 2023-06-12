@@ -5,8 +5,8 @@ namespace RunesWebScraping.application
     public class RuneWebScrap
     {
         public readonly HashSet<string> runeList = new();
-        private readonly string champion;
-        private readonly string lane;
+        public readonly string champion;
+        public readonly string lane;
 
         public RuneWebScrap(string champion, string lane)
         {
