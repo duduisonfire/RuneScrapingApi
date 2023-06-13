@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using RunesWebScraping.application;
 using RunesWebScraping.controllers.classes;
 using RunesWebScraping.domain;
