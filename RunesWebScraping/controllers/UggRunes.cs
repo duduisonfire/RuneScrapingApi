@@ -19,7 +19,7 @@ namespace RunesWebScraping.controllers
         }
 
         [HttpGet]
-        public async Task<UggDB> GetRunes()
+        public async Task<ActionResult<UggDB>> GetRunes()
         {
             var championCache = await _uggDbService!.ChampionCacheExists("aatrox", "top");
 
@@ -32,7 +32,7 @@ namespace RunesWebScraping.controllers
                 championCache = await _uggDbService.CreateChampionCache(runeResponse);
             }
 
-            return championCache;
+            return Ok(championCache);
         }
     }
 }
