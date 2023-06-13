@@ -1,8 +1,8 @@
 using RunesWebScraping.application;
 using RunesWebScraping.controllers.classes;
 using RunesWebScraping.domain;
-using RunesWebScraping.models;
 using RunesWebScraping.services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RunesWebScraping.controllers
 {
@@ -18,20 +18,26 @@ namespace RunesWebScraping.controllers
         }
 
         [HttpGet("{champion}/{lane}")]
-        public async Task<ActionResult<UggDB>> GetRunes(string champion, string lane)
+        public async Task<IActionResult> GetRunes(string champion, string lane)
         {
-            var championCache = await _uggDbService!.ChampionCacheExists(champion, lane);
-
-            if (championCache == null)
+            try
             {
-                var webScrap = new RuneWebScrap(champion, lane);
-                await webScrap.GetRunes();
-                var runesId = new RunePage(webScrap.runeList.ToList());
-                var runeResponse = new RuneResponse(webScrap, runesId);
-                championCache = await _uggDbService.CreateChampionCache(runeResponse);
-            }
+                var championCache = await _uggDbService!.ChampionCacheExists(champion, lane);
 
-            return Ok(championCache);
+                if (championCache == null)
+                {
+                    var webScrap = new RuneWebScrap(champion, lane);
+                    await webScrap.GetRunes();
+                    var runesId = new RunePage(webScrap.runeList.ToList());
+                    var runeResponse = new RuneResponse(webScrap, runesId);
+                    championCache = await _uggDbService.CreateChampionCache(runeResponse);
+                }
+
+                return Ok(championCache);
+            } catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

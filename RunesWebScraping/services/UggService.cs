@@ -1,6 +1,5 @@
 using MongoDB.Driver;
 using RunesWebScraping.models;
-using dotenv.net;
 using RunesWebScraping.controllers.classes;
 
 namespace RunesWebScraping.services
@@ -11,7 +10,6 @@ namespace RunesWebScraping.services
 
         public UggService()
         {
-            DotEnv.Load();
             var connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
             var mongoClient = new MongoClient(connectionString);
             var mongoDatabase = mongoClient.GetDatabase("web-api");
@@ -20,27 +18,39 @@ namespace RunesWebScraping.services
 
         public async Task<UggDB> CreateChampionCache(RuneResponse response)
         {
-            var championCache = await _ugg.Find(
-                e => e.Champion!.ToLower() == response.Champion.ToLower() && e.Lane == response.Lane
-            ).FirstAsync();
+            try
+            {
+                var championCache = await _ugg.Find(
+                    e => e.Champion!.ToLower() == response.Champion.ToLower() && e.Lane == response.Lane
+                ).FirstAsync();
 
-            if (championCache != null) return championCache!;
+                if (championCache != null) return championCache!;
 
-            UggDB newCache = new(response);
-            await _ugg.InsertOneAsync(newCache);
+                UggDB newCache = new(response);
+                await _ugg.InsertOneAsync(newCache);
 
-            return newCache;
+                return newCache;
+            } catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<UggDB?> ChampionCacheExists(string champion, string lane)
         {
-            var championCache = await _ugg.Find(
-                e => e.Champion!.ToLower() == champion.ToLower() && e.Lane == lane
-            ).FirstAsync();
+            try
+            {
+                var championCache = await _ugg.Find(
+                    e => e.Champion!.ToLower() == champion.ToLower() && e.Lane == lane
+                ).FirstAsync();
 
-            if (championCache != null) return championCache;
+                if (championCache != null) return championCache;
 
-            return null;
+                return null;
+            } catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
