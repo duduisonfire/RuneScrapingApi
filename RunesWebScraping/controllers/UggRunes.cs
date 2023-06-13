@@ -18,7 +18,7 @@ namespace RunesWebScraping.controllers
             _uggDbService = uggService;
         }
 
-        [HttpGet("{champion:string}/{lane:string}")]
+        [HttpGet("{champion}/{lane}")]
         public async Task<ActionResult<UggDB>> GetRunes(string champion, string lane)
         {
             var championCache = await _uggDbService!.ChampionCacheExists(champion, lane);
