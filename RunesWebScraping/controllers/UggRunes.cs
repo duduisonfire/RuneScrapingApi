@@ -18,14 +18,14 @@ namespace RunesWebScraping.controllers
             _uggDbService = uggService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<UggDB>> GetRunes()
+        [HttpGet("{champion:string}/{lane:string}")]
+        public async Task<ActionResult<UggDB>> GetRunes(string champion, string lane)
         {
-            var championCache = await _uggDbService!.ChampionCacheExists("aatrox", "top");
+            var championCache = await _uggDbService!.ChampionCacheExists(champion, lane);
 
             if (championCache == null)
             {
-                var webScrap = new RuneWebScrap("aatrox", "top");
+                var webScrap = new RuneWebScrap(champion, lane);
                 await webScrap.GetRunes();
                 var runesId = new RunePage(webScrap.runeList.ToList());
                 var runeResponse = new RuneResponse(webScrap, runesId);
