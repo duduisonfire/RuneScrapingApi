@@ -34,7 +34,8 @@ namespace RunesWebScraping.controllers
                 }
 
                 return Ok(championCache);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

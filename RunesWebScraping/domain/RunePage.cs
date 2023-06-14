@@ -6,13 +6,13 @@ namespace RunesWebScraping.domain
     public class RunePage : IRunePage
     {
         [BsonElement("primaryStyleId")]
-        public int PrimaryStyleId { get; set;}
+        public int PrimaryStyleId { get; set; }
 
         [BsonElement("subStyleId")]
-        public int SubStyleId { get; set;}
+        public int SubStyleId { get; set; }
 
         [BsonElement("selectedPerkIds")]
-        public List<int> SelectedPerkIds { get; set;}
+        public List<int> SelectedPerkIds { get; set; }
 
         public RunePage(List<string> runes)
         {

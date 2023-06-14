@@ -21,16 +21,21 @@ namespace RunesWebScraping.services
             try
             {
                 var championCache = await _ugg.Find(
-                    e => e.Champion!.ToLower() == response.Champion.ToLower() && e.Lane == response.Lane
-                ).FirstAsync();
+                        e =>
+                            e.Champion!.ToLower() == response.Champion.ToLower()
+                            && e.Lane == response.Lane
+                    )
+                    .FirstAsync();
 
-                if (championCache != null) return championCache!;
+                if (championCache != null)
+                    return championCache!;
 
                 UggDB newCache = new(response);
                 await _ugg.InsertOneAsync(newCache);
 
                 return newCache;
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
             }
@@ -41,15 +46,41 @@ namespace RunesWebScraping.services
             try
             {
                 var championCache = await _ugg.Find(
-                    e => e.Champion!.ToLower() == champion.ToLower() && e.Lane == lane
-                ).FirstAsync();
+                        e => e.Champion!.ToLower() == champion.ToLower() && e.Lane == lane
+                    )
+                    .FirstAsync();
 
-                if (championCache != null) return championCache;
+                if (championCache != null)
+                    return championCache;
 
                 return null;
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public async Task<UggDB> UpdateChampionCache(RuneResponse response)
+        {
+            try
+            {
+                var newDocument = new UggDB(response);
+
+                var filter = Builders<UggDB>.Filter.And(
+                    Builders<UggDB>.Filter.Where(
+                        e => e.Champion.ToLower() == response.Champion.ToLower()
+                    ),
+                    Builders<UggDB>.Filter.Where(e => e.Lane == response.Lane)
+                );
+
+                var championCache = await _ugg.FindOneAndReplaceAsync<UggDB>(filter, newDocument);
+
+                return championCache;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Our database is currently experiencing instabilities.");
             }
         }
     }
