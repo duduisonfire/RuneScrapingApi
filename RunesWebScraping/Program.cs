@@ -1,5 +1,7 @@
 using RunesWebScraping.services;
 using dotenv.net;
+using RunesWebScraping;
+using RunesWebScraping.domain;
 
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<UggService>();
+builder.Services.AddSingleton<RuneCacheSync>();
+builder.Services.AddSingleton<LolApi>();
 
 var app = builder.Build();
 

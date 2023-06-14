@@ -1,6 +1,7 @@
 using MongoDB.Driver;
 using RunesWebScraping.models;
 using RunesWebScraping.controllers.classes;
+using MongoDB.Bson;
 
 namespace RunesWebScraping.services
 {
@@ -80,6 +81,20 @@ namespace RunesWebScraping.services
             }
             catch (Exception)
             {
+                throw new Exception("Our database is currently experiencing instabilities.");
+            }
+        }
+
+        public async Task<long> ChampionRunesCacheLength()
+        {
+            try
+            {
+                var length = await _ugg.CountDocumentsAsync(new BsonDocument());
+
+                return length;
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
                 throw new Exception("Our database is currently experiencing instabilities.");
             }
         }

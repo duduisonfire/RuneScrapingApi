@@ -8,10 +8,12 @@ namespace RunesWebScraping;
 public class RuneCacheSync
 {
     private readonly UggService _uggDbService;
+    private readonly LolApi _lolApi;
 
-    public RuneCacheSync(UggService uggService)
+    public RuneCacheSync(UggService uggService, LolApi lolApi)
     {
         _uggDbService = uggService;
+        _lolApi = lolApi;
     }
 
     private async Task UpdateChampionCache(string champion, string lane)
@@ -43,8 +45,7 @@ public class RuneCacheSync
 
     public async Task UpdateAllRunes()
     {
-        var lolApi = new LolApi();
-        var championList = await lolApi.GetChampionList();
+        var championList = await _lolApi.GetChampionList();
 
         for (int i = 0; i < championList.Count; i++)
         {
