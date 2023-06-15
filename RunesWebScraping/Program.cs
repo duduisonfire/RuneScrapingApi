@@ -17,8 +17,6 @@ builder.Services.AddSingleton<RuneCacheSync>();
 builder.Services.AddSingleton<LolApi>();
 builder.Services.AddSingleton<CacheManager>();
 
-
-
 var app = builder.Build();
 var cacheManager = app.Services.GetRequiredService<CacheManager>();
 
