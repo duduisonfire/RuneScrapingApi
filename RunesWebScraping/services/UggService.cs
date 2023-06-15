@@ -33,7 +33,7 @@ namespace RunesWebScraping.services
                             e.Champion!.ToLower() == response.Champion.ToLower()
                             && e.Lane == response.Lane
                     )
-                    .FirstAsync();
+                    .FirstOrDefaultAsync();
 
                 if (championCache != null)
                     return championCache!;
@@ -56,7 +56,7 @@ namespace RunesWebScraping.services
                 var championCache = await _ugg.Find(
                         e => e.Champion!.ToLower() == champion.ToLower() && e.Lane == lane
                     )
-                    .FirstAsync();
+                    .FirstOrDefaultAsync();
 
                 if (championCache != null)
                     return championCache;

@@ -75,7 +75,7 @@ namespace RunesWebScraping.domain
                 { "Gathering Storm", 8236 },
                 { "Adaptive Force", 5008 },
                 { "Attack Speed", 5005 },
-                { "Cooldown Reduction", 5007 },
+                { "CDR", 5007 },
                 { "Armor", 5002 },
                 { "Magic Resist", 5003 },
                 { "Health", 5001 },

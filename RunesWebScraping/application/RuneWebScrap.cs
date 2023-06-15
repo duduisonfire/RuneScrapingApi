@@ -97,7 +97,7 @@ namespace RunesWebScraping.application
                 {
                     var runeName = runesLists[2][i];
 
-                    runeName = runeName.Replace("Scaling Bonus ", "");
+                    runeName = runeName.Replace("The Scaling ", "");
                     runeName = runeName.Replace("The ", "");
                     runeName = runeName.Replace(" Shard", "");
 
