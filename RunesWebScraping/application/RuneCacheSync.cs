@@ -22,7 +22,7 @@ public class RuneCacheSync
         {
             var webScrap = new RuneWebScrap(champion, lane);
             await webScrap.GetRunes();
-            var runesId = new RunePage(webScrap.runeList.ToList());
+            var runesId = new RunePage(webScrap.runeList);
             var runeResponse = new RuneResponse(webScrap, runesId);
 
             var ChampionCacheExists = await _uggDbService.ChampionCacheExists(champion, lane);
@@ -37,10 +37,10 @@ public class RuneCacheSync
             await _uggDbService.CreateChampionCache(runeResponse);
             Console.WriteLine($"The runes of {champion} in {lane} are created.");
         }
-        catch (Exception)
+        catch (Exception e)
         {
             Console.WriteLine(
-                "The u.gg website is experiencing problems and we can't get runes data."
+                e.Message
             );
             throw;
         }

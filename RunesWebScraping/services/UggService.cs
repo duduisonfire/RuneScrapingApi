@@ -15,13 +15,13 @@ namespace RunesWebScraping.services
             var mongoClient = new MongoClient(connectionString);
             var mongoDatabase = mongoClient.GetDatabase("web-api");
             _ugg = mongoDatabase.GetCollection<UggDB>("uggrunescaches");
-            var index = new IndexKeysDefinitionBuilder<UggDB>().Ascending(e => e.CreatedAt);
-            _ugg.Indexes.CreateOne(
-                new CreateIndexModel<UggDB>(
-                    index,
-                    new CreateIndexOptions { ExpireAfter = TimeSpan.FromSeconds(60 * 60 * 30) }
-                )
-            );
+            // var index = new IndexKeysDefinitionBuilder<UggDB>().Ascending(e => e.CreatedAt);
+            // _ugg.Indexes.CreateOne(
+            //     new CreateIndexModel<UggDB>(
+            //         index,
+            //         new CreateIndexOptions { ExpireAfter = TimeSpan.FromSeconds(60 * 60 * 30) }
+            //     )
+            // );
         }
 
         public async Task<UggDB> CreateChampionCache(RuneResponse response)
