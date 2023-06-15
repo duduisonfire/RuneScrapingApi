@@ -92,7 +92,8 @@ namespace RunesWebScraping.services
                 var length = await _ugg.CountDocumentsAsync(new BsonDocument());
 
                 return length;
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 throw new Exception("Our database is currently experiencing instabilities.");

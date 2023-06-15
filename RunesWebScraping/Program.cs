@@ -21,20 +21,25 @@ var app = builder.Build();
 var cacheManager = app.Services.GetRequiredService<CacheManager>();
 
 var lifetime = app.Lifetime;
-lifetime.ApplicationStarted.Register(async () => {
+lifetime.ApplicationStarted.Register(async () =>
+{
     var hasCache = await cacheManager.VerifyCache();
 
     if (!hasCache)
     {
         await cacheManager.SyncCache();
         Console.WriteLine("Syncing the cache");
-    } else {
+    }
+    else
+    {
         Console.WriteLine("Have cache");
     }
 
-    ThreadStart thread = new(async () => {
-        await cacheManager.SyncCache();
-    });
+    ThreadStart thread =
+        new(async () =>
+        {
+            await cacheManager.SyncCache();
+        });
 
     var cron = new CronDaemon();
     cron.AddJob("* 22 * * *", thread);

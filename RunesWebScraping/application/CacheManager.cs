@@ -22,7 +22,8 @@ public class CacheManager
         try
         {
             await _runeCacheSync.UpdateAllRunes();
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e.Message);
             throw;
@@ -37,7 +38,8 @@ public class CacheManager
             var haveCache = await _uggService.ChampionRunesCacheLength() / 5 == championListLength;
 
             return haveCache;
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine($"{e.Message}");
             throw;

@@ -36,9 +36,12 @@ public class RuneCacheSync
 
             await _uggDbService.CreateChampionCache(runeResponse);
             Console.WriteLine($"The runes of {champion} in {lane} are created.");
-        } catch (Exception)
+        }
+        catch (Exception)
         {
-            Console.WriteLine("The u.gg website is experiencing problems and we can't get runes data.");
+            Console.WriteLine(
+                "The u.gg website is experiencing problems and we can't get runes data."
+            );
             throw;
         }
     }
