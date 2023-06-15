@@ -15,7 +15,7 @@ builder.Services.AddSingleton<UggService>();
 builder.Services.AddSingleton<RuneCacheSync>();
 builder.Services.AddSingleton<LolApi>();
 
-var app = builder.Build();
+var app = builder.Build(); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
