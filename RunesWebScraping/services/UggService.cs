@@ -82,7 +82,12 @@ namespace RunesWebScraping.services
                     Builders<UggDB>.Filter.Where(e => e.Lane == response.Lane)
                 );
 
-                var championCache = await _ugg.FindOneAndReplaceAsync<UggDB>(filter, newDocument);
+                var update = Builders<UggDB>.Update
+                    .Set(e => e.RunesId, response.RunesId)
+                    .Set(e => e.Runes, response.Runes)
+                    .Set(e => e.CreatedAt, DateTime.Now);
+
+                var championCache = await _ugg.FindOneAndUpdateAsync<UggDB>(filter, update);
 
                 return championCache;
             }
