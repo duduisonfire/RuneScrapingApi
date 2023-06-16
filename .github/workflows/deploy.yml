@@ -35,6 +35,12 @@ jobs:
     - name: Configuring Git repo
       run: git init && git add . && git commit -m "Program Deploying"
 
+    - name: Adding files to commit
+      run: git add .
+
+    - name: The first commit
+      run: git commit -m "Program Deploying"
+
     - name: Adding remote repo
       run: git remote add prod ${{ secrets.SSH_HOST }}:webscrap-deploy
 
