@@ -33,7 +33,7 @@ jobs:
       run: git config --global user.email igor.tiburcio.cs@gmail.com
 
     - name: Configuring Git repo
-      run: git init && git add . && git commit -m "Program Deploying"
+      run: git init
 
     - name: Adding files to commit
       run: git add .
