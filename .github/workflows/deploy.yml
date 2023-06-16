@@ -1,0 +1,43 @@
+name: CD
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet: ["7.0.x"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Building
+      run: dotnet publish -r linux-x64 --self-contained false
+
+    - name: Configure git repo
+      run: cd /bin/Debug/net7.0/linux-x64/ && git init && git add . && git commit -m "Program Deploying"
+
+    - name: Adding remote repo
+      run: git remote add prod ${{ secrets.SSH_HOST }}:webscrap-deploy
+
+    - name: Pushing the build to VPS
+      run: git push prod master
+
+    - name: Deploy to ${{ secrets.SSH_HOST }}
+      uses: appleboy/ssh-action@master
+      with:
+        username: ${{ secrets.SSH_USERNAME }}
+        host: ${{ secrets.SSH_HOST }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: 'cd webscrap-prod && docker compose down && docker compose build && docker compose start'
