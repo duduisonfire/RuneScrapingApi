@@ -24,7 +24,7 @@ jobs:
       run: dotnet publish -r linux-x64 --self-contained false
 
     - name: Entering folder
-      run: cd ~/work/RuneScrapingApi/RuneScrapingApi/Tests/bin/Debug/net7.0/linux-x64/publish/ 
+      run: cd /home/runner/work/RuneScrapingApi/RuneScrapingApi/Tests/bin/Debug/net7.0/linux-x64/publish/ 
 
     - name: Configuring Git repo
       run: git init && git add . && git commit -m "Program Deploying"
