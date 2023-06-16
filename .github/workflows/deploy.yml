@@ -32,15 +32,6 @@ jobs:
     - name: Configuring Git Email
       run: git config --global user.email igor.tiburcio.cs@gmail.com
 
-    - name: Configuring Git repo
-      run: git init
-
-    - name: Adding files to commit
-      run: git add .
-
-    - name: The first commit
-      run: git commit -m "Program Deploying"
-
     - name: Adding remote repo
       run: git remote add prod ${{ secrets.SSH_HOST }}:webscrap-deploy
 
