@@ -53,7 +53,7 @@ jobs:
     - name: Start API
       uses: garygrossgarten/github-action-ssh@v0.6.3
       with:
-        command: cd webscrap-prod && docker compose build && docker compose start
+        command: cd /home/root/webscrap-prod && docker compose build && docker compose create && docker compose start
         host: ${{ secrets.REMOTE_HOST }}
         username: ${{ secrets.REMOTE_USER }}
         passphrase: ${{ secrets.PASSPHRASE }}
