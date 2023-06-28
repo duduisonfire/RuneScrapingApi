@@ -43,6 +43,7 @@ lifetime.ApplicationStarted.Register(async () =>
 
     var cron = new CronDaemon();
     cron.AddJob("* 22 * * *", thread);
+    cron.Start();
 });
 
 // Configure the HTTP request pipeline.
