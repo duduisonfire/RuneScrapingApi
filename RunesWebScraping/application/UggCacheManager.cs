@@ -3,14 +3,14 @@ using RunesWebScraping.services;
 
 namespace RunesWebScraping;
 
-public class CacheManager
+public class UggCacheManager
 {
     public bool hasCache = false;
-    private readonly RuneCacheSync _runeCacheSync;
+    private readonly UggRuneCacheSync _runeCacheSync;
     private readonly UggService _uggService;
     private readonly LolApi _lolApi;
 
-    public CacheManager(UggService uggService, RuneCacheSync runeCacheSync, LolApi lolApi)
+    public UggCacheManager(UggService uggService, UggRuneCacheSync runeCacheSync, LolApi lolApi)
     {
         _uggService = uggService;
         _runeCacheSync = runeCacheSync;

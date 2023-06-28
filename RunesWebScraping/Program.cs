@@ -12,37 +12,37 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<UggService>();
-builder.Services.AddSingleton<RuneCacheSync>();
 builder.Services.AddSingleton<LolApi>();
-builder.Services.AddSingleton<CacheManager>();
+builder.Services.AddSingleton<UggService>();
+builder.Services.AddSingleton<UggRuneCacheSync>();
+builder.Services.AddSingleton<UggCacheManager>();
 
 var app = builder.Build();
-var cacheManager = app.Services.GetRequiredService<CacheManager>();
+var uggCacheManager = app.Services.GetRequiredService<UggCacheManager>();
 
 var lifetime = app.Lifetime;
 lifetime.ApplicationStarted.Register(async () =>
 {
-    var hasCache = await cacheManager.VerifyCache();
+    var hasCache = await uggCacheManager.VerifyCache();
 
     if (!hasCache)
     {
-        await cacheManager.SyncCache();
         Console.WriteLine("Syncing the cache");
+        await uggCacheManager.SyncCache();
     }
     else
     {
         Console.WriteLine("Have cache");
     }
 
-    ThreadStart thread =
+    ThreadStart uggSyncCache =
         new(async () =>
         {
-            await cacheManager.SyncCache();
+            await uggCacheManager.SyncCache();
         });
 
     var cron = new CronDaemon();
-    cron.AddJob("* 22 * * *", thread);
+    cron.AddJob("* 22 * * *", uggSyncCache);
     cron.Start();
 });
 

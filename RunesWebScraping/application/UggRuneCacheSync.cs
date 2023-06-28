@@ -5,12 +5,12 @@ using RunesWebScraping.services;
 
 namespace RunesWebScraping;
 
-public class RuneCacheSync
+public class UggRuneCacheSync
 {
     private readonly UggService _uggDbService;
     private readonly LolApi _lolApi;
 
-    public RuneCacheSync(UggService uggService, LolApi lolApi)
+    public UggRuneCacheSync(UggService uggService, LolApi lolApi)
     {
         _uggDbService = uggService;
         _lolApi = lolApi;
