@@ -108,7 +108,7 @@ namespace RunesWebScraping.application
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                throw;
+                return;
             }
         }
     }
