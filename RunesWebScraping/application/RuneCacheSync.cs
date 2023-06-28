@@ -16,11 +16,11 @@ public class RuneCacheSync
         _lolApi = lolApi;
     }
 
-    private async Task UpdateChampionCache(string champion, string lane)
+    public async Task<RuneResponse> UpdateChampionCache(string champion, string lane)
     {
         while (true)
         {
-                try
+            try
             {
                 var webScrap = new RuneWebScrap(champion, lane);
                 await webScrap.GetRunes();
@@ -33,10 +33,14 @@ public class RuneCacheSync
                 {
                     await _uggDbService.UpdateChampionCache(runeResponse);
                     Console.WriteLine($"The runes of {champion} in {lane} are updated.");
-                    return;
                 }
-                await _uggDbService.CreateChampionCache(runeResponse);
-                Console.WriteLine($"The runes of {champion} in {lane} are created.");
+                else
+                {
+                    await _uggDbService.CreateChampionCache(runeResponse);
+                    Console.WriteLine($"The runes of {champion} in {lane} are created.");
+                }
+
+                return runeResponse;
             }
             catch (Exception e)
             {
