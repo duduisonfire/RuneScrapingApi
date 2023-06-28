@@ -26,7 +26,7 @@ public class CacheManager
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-            throw;
+            return;
         }
     }
 

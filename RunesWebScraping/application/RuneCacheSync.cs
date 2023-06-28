@@ -46,17 +46,25 @@ public class RuneCacheSync
 
     public async Task UpdateAllRunes()
     {
-        var championList = await _lolApi.GetChampionList();
-
-        for (int i = 0; i < championList.Count; i++)
+        try
         {
-            await UpdateChampionCache(championList[i], "mid");
-            await UpdateChampionCache(championList[i], "top");
-            await UpdateChampionCache(championList[i], "jungle");
-            await UpdateChampionCache(championList[i], "adc");
-            await UpdateChampionCache(championList[i], "support");
+            var championList = await _lolApi.GetChampionList();
 
-            Console.WriteLine($"Updated {championList[i]} runes cache.");
+            for (int i = 0; i < championList.Count; i++)
+            {
+                await UpdateChampionCache(championList[i], "mid");
+                await UpdateChampionCache(championList[i], "top");
+                await UpdateChampionCache(championList[i], "jungle");
+                await UpdateChampionCache(championList[i], "adc");
+                await UpdateChampionCache(championList[i], "support");
+
+                Console.WriteLine($"Updated {championList[i]} runes cache.");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return;
         }
     }
 }
