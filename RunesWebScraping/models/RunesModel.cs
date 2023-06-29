@@ -6,7 +6,7 @@ using RunesWebScraping.domain;
 namespace RunesWebScraping.models
 {
     [BsonIgnoreExtraElements]
-    public class UggDB
+    public class RunesModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -27,7 +27,7 @@ namespace RunesWebScraping.models
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public UggDB(RuneResponse response)
+        public RunesModel(RuneResponse response)
         {
             Champion = response.Champion;
             Lane = response.Lane;

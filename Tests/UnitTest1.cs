@@ -9,7 +9,10 @@ public class UnitTest1
     [Fact]
     public async Task Test1()
     {
-        Environment.SetEnvironmentVariable("CONNECTIONSTRING", "mongodb+srv://igortiburciocs:Zerocoll12@cluster0.uh1myey.mongodb.net/");
+        Environment.SetEnvironmentVariable(
+            "CONNECTIONSTRING",
+            "mongodb+srv://igortiburciocs:Zerocoll12@cluster0.uh1myey.mongodb.net/"
+        );
         var cacheSync = new RuneCacheSync(new UggService(), new LolApi());
         var runeResponse = await cacheSync.UpdateChampionCache("fizz", "top");
 

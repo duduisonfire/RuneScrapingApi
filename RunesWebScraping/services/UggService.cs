@@ -7,14 +7,14 @@ namespace RunesWebScraping.services
 {
     public class UggService
     {
-        private readonly IMongoCollection<UggDB> _ugg;
+        private readonly IMongoCollection<RunesModel> _ugg;
 
         public UggService()
         {
             var connectionString = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
             var mongoClient = new MongoClient(connectionString);
             var mongoDatabase = mongoClient.GetDatabase("web-api");
-            _ugg = mongoDatabase.GetCollection<UggDB>("uggrunescaches");
+            _ugg = mongoDatabase.GetCollection<RunesModel>("uggrunescaches");
             // var index = new IndexKeysDefinitionBuilder<UggDB>().Ascending(e => e.CreatedAt);
             // _ugg.Indexes.CreateOne(
             //     new CreateIndexModel<UggDB>(
@@ -24,7 +24,7 @@ namespace RunesWebScraping.services
             // );
         }
 
-        public async Task<UggDB> CreateChampionCache(RuneResponse response)
+        public async Task<RunesModel> CreateChampionCache(RuneResponse response)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace RunesWebScraping.services
                 if (championCache != null)
                     return championCache!;
 
-                UggDB newCache = new(response);
+                RunesModel newCache = new(response);
                 await _ugg.InsertOneAsync(newCache);
 
                 return newCache;
@@ -49,7 +49,7 @@ namespace RunesWebScraping.services
             }
         }
 
-        public async Task<UggDB?> ChampionCacheExists(string champion, string lane)
+        public async Task<RunesModel?> ChampionCacheExists(string champion, string lane)
         {
             try
             {
@@ -69,25 +69,25 @@ namespace RunesWebScraping.services
             }
         }
 
-        public async Task<UggDB> UpdateChampionCache(RuneResponse response)
+        public async Task<RunesModel> UpdateChampionCache(RuneResponse response)
         {
             try
             {
-                var newDocument = new UggDB(response);
+                var newDocument = new RunesModel(response);
 
-                var filter = Builders<UggDB>.Filter.And(
-                    Builders<UggDB>.Filter.Where(
+                var filter = Builders<RunesModel>.Filter.And(
+                    Builders<RunesModel>.Filter.Where(
                         e => e.Champion.ToLower() == response.Champion.ToLower()
                     ),
-                    Builders<UggDB>.Filter.Where(e => e.Lane == response.Lane)
+                    Builders<RunesModel>.Filter.Where(e => e.Lane == response.Lane)
                 );
 
-                var update = Builders<UggDB>.Update
+                var update = Builders<RunesModel>.Update
                     .Set(e => e.RunesId, response.RunesId)
                     .Set(e => e.Runes, response.Runes)
                     .Set(e => e.CreatedAt, DateTime.Now);
 
-                var championCache = await _ugg.FindOneAndUpdateAsync<UggDB>(filter, update);
+                var championCache = await _ugg.FindOneAndUpdateAsync<RunesModel>(filter, update);
 
                 return championCache;
             }
