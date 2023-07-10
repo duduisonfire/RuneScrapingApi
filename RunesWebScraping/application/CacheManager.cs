@@ -5,7 +5,6 @@ namespace RunesWebScraping;
 
 public class CacheManager
 {
-    public bool hasCache = false;
     private readonly RuneCacheSync _runeCacheSync;
     private readonly UggService _uggService;
     private readonly LolApi _lolApi;
