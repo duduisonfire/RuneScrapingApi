@@ -3,4 +3,3 @@ bin
 docker-compose.yml
 dockerfile
 .idea
-.jss
