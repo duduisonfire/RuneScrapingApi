@@ -1,22 +1,23 @@
 ﻿using RunesWebScraping.controllers.classes;
+using RunesWebScraping.controllers.interfaces;
 using RunesWebScraping.domain;
 using RunesWebScraping.infra;
 using RunesWebScraping.repository;
 
 namespace RunesWebScraping.cases;
 
-public class RuneCacheSync
+public class RuneCacheSync : IRuneCacheSync
 {
-    private readonly UggRepository _uggDbRepository;
-    private readonly LolApi _lolApi;
+    private readonly IUggRepository _uggDbRepository;
+    private readonly ILolApi _lolApi;
 
-    public RuneCacheSync(UggRepository uggRepository, LolApi lolApi)
+    public RuneCacheSync(IUggRepository uggRepository, ILolApi lolApi)
     {
         _uggDbRepository = uggRepository;
         _lolApi = lolApi;
     }
 
-    public async Task<RuneResponse> UpdateChampionCache(string champion, string lane)
+    public async Task<IRuneResponse> UpdateChampionCache(string champion, string lane)
     {
         while (true)
         {

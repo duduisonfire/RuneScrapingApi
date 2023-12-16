@@ -1,9 +1,8 @@
 using Newtonsoft.Json;
-using RunesWebScraping.domain.classes;
 
 namespace RunesWebScraping.domain
 {
-    public class LolApi
+    public class LolApi : ILolApi
     {
         public async Task<string> GetLolVersion()
         {

@@ -1,5 +1,5 @@
 using MongoDB.Bson.Serialization.Attributes;
-using RunesWebScraping.domain.interfaces;
+using RunesWebScraping.domain;
 
 namespace RunesWebScraping.domain
 {

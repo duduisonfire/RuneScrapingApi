@@ -2,10 +2,11 @@ using MongoDB.Driver;
 using RunesWebScraping.models;
 using RunesWebScraping.controllers.classes;
 using MongoDB.Bson;
+using RunesWebScraping.controllers.interfaces;
 
 namespace RunesWebScraping.repository
 {
-    public class UggRepository
+    public class UggRepository : IUggRepository
     {
         private readonly IMongoCollection<UggDB> _ugg;
 
@@ -24,7 +25,7 @@ namespace RunesWebScraping.repository
             );
         }
 
-        public async Task<UggDB> CreateChampionCache(RuneResponse response)
+        public async Task<UggDB> CreateChampionCache(IRuneResponse response)
         {
             try
             {
@@ -72,7 +73,7 @@ namespace RunesWebScraping.repository
             }
         }
 
-        public async Task<UggDB> UpdateChampionCache(RuneResponse response)
+        public async Task<UggDB> UpdateChampionCache(IRuneResponse response)
         {
             try
             {

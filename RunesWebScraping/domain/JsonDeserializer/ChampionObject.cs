@@ -1,4 +1,4 @@
-namespace RunesWebScraping.domain.classes
+namespace RunesWebScraping.domain
 {
     public class ChampionObject
     {

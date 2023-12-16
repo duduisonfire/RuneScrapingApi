@@ -11,10 +11,10 @@ namespace RunesWebScraping.controllers;
 [Route("api/ugg")]
 public class UggRunes : Controller
 {
-    private readonly UggRepository _uggDbRepository;
-    private readonly ChampionsListCacheSync _championsListCacheSync;
+    private readonly IUggRepository _uggDbRepository;
+    private readonly IChampionsListCacheSync _championsListCacheSync;
 
-    public UggRunes(UggRepository uggRepository, ChampionsListCacheSync champions)
+    public UggRunes(IUggRepository uggRepository, IChampionsListCacheSync champions)
     {
         _uggDbRepository = uggRepository;
         _championsListCacheSync = champions;

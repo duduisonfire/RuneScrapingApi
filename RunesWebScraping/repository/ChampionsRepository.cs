@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace RunesWebScraping.repository;
 
-public class ChampionsRepository
+public class ChampionsRepository : IChampionsRepository
 {
     private readonly IMongoCollection<ChampionsLane> _championsLane;
 

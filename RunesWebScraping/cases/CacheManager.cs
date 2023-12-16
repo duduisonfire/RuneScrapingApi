@@ -3,20 +3,20 @@ using RunesWebScraping.repository;
 
 namespace RunesWebScraping.cases;
 
-public class CacheManager
+public class CacheManager : ICacheManager
 {
-    private readonly RuneCacheSync _runeCacheSync;
-    private readonly UggRepository _uggRepository;
-    private readonly ChampionsRepository _championsRepository;
-    private readonly LolApi _lolApi;
-    private readonly ChampionsListCacheSync _championsListCacheSync;
+    private readonly IRuneCacheSync _runeCacheSync;
+    private readonly IUggRepository _uggRepository;
+    private readonly IChampionsRepository _championsRepository;
+    private readonly ILolApi _lolApi;
+    private readonly IChampionsListCacheSync _championsListCacheSync;
 
     public CacheManager(
-        UggRepository uggRepository,
-        RuneCacheSync runeCacheSync,
-        ChampionsRepository championsRepository,
-        ChampionsListCacheSync championsListCacheSync,
-        LolApi lolApi
+        IUggRepository uggRepository,
+        IRuneCacheSync runeCacheSync,
+        IChampionsRepository championsRepository,
+        IChampionsListCacheSync championsListCacheSync,
+        ILolApi lolApi
     )
     {
         _uggRepository = uggRepository;
@@ -56,7 +56,7 @@ public class CacheManager
         {
             var championListLength = (await _lolApi.GetChampionList()).Count;
             var haveCache =
-                await _uggRepository.ChampionRunesCacheLength() / 5 == championListLength;
+                (await _uggRepository.ChampionRunesCacheLength() / 5) == championListLength;
 
             return haveCache;
         }

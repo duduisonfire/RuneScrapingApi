@@ -12,15 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<UggRepository>();
-builder.Services.AddSingleton<ChampionsRepository>();
-builder.Services.AddTransient<RuneCacheSync>();
-builder.Services.AddTransient<ChampionsListCacheSync>();
-builder.Services.AddTransient<LolApi>();
-builder.Services.AddTransient<CacheManager>();
+
+builder.Services.AddSingleton<IUggRepository, UggRepository>();
+builder.Services.AddSingleton<IChampionsRepository, ChampionsRepository>();
+builder.Services.AddTransient<IRuneCacheSync, RuneCacheSync>();
+builder.Services.AddTransient<IChampionsListCacheSync, ChampionsListCacheSync>();
+builder.Services.AddTransient<ILolApi, LolApi>();
+builder.Services.AddTransient<ICacheManager, CacheManager>();
 
 var app = builder.Build();
-var cacheManager = app.Services.GetRequiredService<CacheManager>();
+var cacheManager = app.Services.GetRequiredService<ICacheManager>();
 
 app.Lifetime.ApplicationStarted.Register(async () =>
 {

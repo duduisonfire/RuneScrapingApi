@@ -1,5 +1,4 @@
 using RunesWebScraping.domain;
-using RunesWebScraping.domain.classes;
 
 namespace RunesWebScraping.infra;
 

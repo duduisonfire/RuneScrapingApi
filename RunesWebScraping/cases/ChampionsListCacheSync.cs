@@ -4,12 +4,12 @@ using RunesWebScraping.repository;
 
 namespace RunesWebScraping.cases;
 
-public class ChampionsListCacheSync
+public class ChampionsListCacheSync : IChampionsListCacheSync
 {
-    private readonly ChampionsRepository _championsRepository;
-    private readonly LolApi _lolApi;
+    private readonly IChampionsRepository _championsRepository;
+    private readonly ILolApi _lolApi;
 
-    public ChampionsListCacheSync(ChampionsRepository championsRepository, LolApi lolApi)
+    public ChampionsListCacheSync(IChampionsRepository championsRepository, ILolApi lolApi)
     {
         _championsRepository = championsRepository;
         _lolApi = lolApi;

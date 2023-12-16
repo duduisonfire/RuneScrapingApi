@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using RunesWebScraping.controllers.classes;
+using RunesWebScraping.controllers.interfaces;
 using RunesWebScraping.domain;
 
 namespace RunesWebScraping.models
@@ -27,7 +28,7 @@ namespace RunesWebScraping.models
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public UggDB(RuneResponse response)
+        public UggDB(IRuneResponse response)
         {
             Champion = response.Champion;
             Lane = response.Lane;

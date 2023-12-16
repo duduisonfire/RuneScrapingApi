@@ -1,4 +1,4 @@
-namespace RunesWebScraping.domain.interfaces
+namespace RunesWebScraping.domain
 {
     public interface IRunePage
     {
