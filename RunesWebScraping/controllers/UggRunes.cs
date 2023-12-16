@@ -1,9 +1,9 @@
-using RunesWebScraping.cases;
-using RunesWebScraping.controllers.classes;
-using RunesWebScraping.domain;
-using RunesWebScraping.repository;
 using Microsoft.AspNetCore.Mvc;
+using RunesWebScraping.cases;
+using RunesWebScraping.controllers.interfaces;
+using RunesWebScraping.domain;
 using RunesWebScraping.infra;
+using RunesWebScraping.repository;
 
 namespace RunesWebScraping.controllers;
 
@@ -47,7 +47,7 @@ public class UggRunes : Controller
                     runesId.Add(pageBuilder.listOfRunesId[i]);
                 }
 
-                var runeResponse = new RuneResponse(pageBuilder);
+                IRuneResponse runeResponse = new RuneResponse(pageBuilder);
                 championCache = await _uggDbRepository.CreateChampionCache(runeResponse);
             }
 

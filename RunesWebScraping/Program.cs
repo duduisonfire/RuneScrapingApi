@@ -1,8 +1,8 @@
-using RunesWebScraping.repository;
+using CronNET;
+using dotenv.net;
 using RunesWebScraping.cases;
 using RunesWebScraping.domain;
-using dotenv.net;
-using CronNET;
+using RunesWebScraping.repository;
 
 DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
@@ -23,21 +23,23 @@ builder.Services.AddTransient<ICacheManager, CacheManager>();
 var app = builder.Build();
 var cacheManager = app.Services.GetRequiredService<ICacheManager>();
 
-app.Lifetime.ApplicationStarted.Register(async () =>
-{
-    await cacheManager.UpdateAllCaches();
+app.Lifetime
+    .ApplicationStarted
+    .Register(async () =>
+    {
+        await cacheManager.UpdateAllCaches();
 
-    ThreadStart thread =
-        new(async () =>
-        {
-            await cacheManager.SyncRunesCache();
-            await cacheManager.SyncChampionsCache();
-        });
+        ThreadStart thread =
+            new(async () =>
+            {
+                await cacheManager.SyncRunesCache();
+                await cacheManager.SyncChampionsCache();
+            });
 
-    var cron = new CronDaemon();
-    cron.AddJob("* 22 * * *", thread);
-    cron.Start();
-});
+        var cron = new CronDaemon();
+        cron.AddJob("* 22 * * *", thread);
+        cron.Start();
+    });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,6 +1,6 @@
-using RunesWebScraping.models;
-using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using RunesWebScraping.models;
 
 namespace RunesWebScraping.repository;
 

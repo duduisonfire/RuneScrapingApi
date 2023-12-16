@@ -1,6 +1,7 @@
 namespace RunesWebScraping.cases;
 
-public interface ICacheManager {
+public interface ICacheManager
+{
     Task SyncRunesCache();
     Task SyncChampionsCache();
     Task<bool> VerifyRunesCache();

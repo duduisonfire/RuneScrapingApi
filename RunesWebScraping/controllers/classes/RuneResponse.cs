@@ -1,9 +1,8 @@
-using RunesWebScraping.cases;
 using RunesWebScraping.controllers.interfaces;
 using RunesWebScraping.domain;
 using RunesWebScraping.infra;
 
-namespace RunesWebScraping.controllers.classes
+namespace RunesWebScraping.controllers
 {
     public class RuneResponse : IRuneResponse
     {

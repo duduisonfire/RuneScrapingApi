@@ -81,9 +81,8 @@ public class UggWebScrap
             List<string> runes = new();
 
             treeNameList.RemoveRange(2, 2);
-            majorRuneList.RemoveRange(6,6);
+            majorRuneList.RemoveRange(6, 6);
             minorsRuneList.RemoveRange(3, 3);
-
 
             runes.AddRange(treeNameList);
             runes.AddRange(majorRuneList);

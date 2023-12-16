@@ -1,8 +1,7 @@
-using MongoDB.Driver;
-using RunesWebScraping.models;
-using RunesWebScraping.controllers.classes;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using RunesWebScraping.controllers.interfaces;
+using RunesWebScraping.models;
 
 namespace RunesWebScraping.repository
 {
@@ -79,19 +78,24 @@ namespace RunesWebScraping.repository
             {
                 var newDocument = new UggDB(response);
 
-                var filter = Builders<UggDB>.Filter.And(
-                    Builders<UggDB>.Filter.Where(
-                        e =>
-                            string.Equals(
-                                e.Champion,
-                                response.Champion,
-                                StringComparison.CurrentCultureIgnoreCase
-                            )
-                    ),
-                    Builders<UggDB>.Filter.Where(e => e.Lane == response.Lane)
-                );
+                var filter = Builders<UggDB>
+                    .Filter
+                    .And(
+                        Builders<UggDB>
+                            .Filter
+                            .Where(
+                                e =>
+                                    string.Equals(
+                                        e.Champion,
+                                        response.Champion,
+                                        StringComparison.CurrentCultureIgnoreCase
+                                    )
+                            ),
+                        Builders<UggDB>.Filter.Where(e => e.Lane == response.Lane)
+                    );
 
-                var update = Builders<UggDB>.Update
+                var update = Builders<UggDB>
+                    .Update
                     .Set(e => e.RunesId, response.RunesId)
                     .Set(e => e.Runes, response.Runes)
                     .Set(e => e.CreatedAt, DateTime.Now);

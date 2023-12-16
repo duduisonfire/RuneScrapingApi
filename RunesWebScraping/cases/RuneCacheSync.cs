@@ -1,4 +1,4 @@
-﻿using RunesWebScraping.controllers.classes;
+﻿using RunesWebScraping.controllers;
 using RunesWebScraping.controllers.interfaces;
 using RunesWebScraping.domain;
 using RunesWebScraping.infra;

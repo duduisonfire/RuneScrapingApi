@@ -1,6 +1,5 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using RunesWebScraping.controllers.classes;
 using RunesWebScraping.controllers.interfaces;
 using RunesWebScraping.domain;
 
