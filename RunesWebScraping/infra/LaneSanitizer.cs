@@ -6,7 +6,7 @@ public class LaneSanitizer
 
     public LaneSanitizer(string lane)
     {
-        if (lane.ToLower() == "middle")
+        if (lane.ToLower() == "middle" || lane.ToLower() == "mid")
             NormalizedLaneName = "mid";
         if (lane.ToLower() == "bottom" || lane.ToLower() == "bot")
             NormalizedLaneName = "adc";
