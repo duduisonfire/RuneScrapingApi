@@ -10,9 +10,11 @@ public class LaneSanitizer
             NormalizedLaneName = "mid";
         if (lane.ToLower() == "bottom" || lane.ToLower() == "bot")
             NormalizedLaneName = "adc";
-        if (lane.ToLower() == "utility")
+        if (lane.ToLower() == "utility" || lane.ToLower() == "supp" || lane.ToLower() == "support")
             NormalizedLaneName = "supp";
         if (lane.ToLower() == "jg" || lane.ToLower() == "jung" || lane.ToLower() == "jungle")
             NormalizedLaneName = "jungle";
+        if (lane.ToLower() == "top" || lane.ToLower() == "solo")
+            NormalizedLaneName = "top";
     }
 }
