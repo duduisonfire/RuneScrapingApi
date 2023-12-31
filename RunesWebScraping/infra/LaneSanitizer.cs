@@ -8,7 +8,7 @@ public class LaneSanitizer
     {
         if (lane.ToLower() == "middle" || lane.ToLower() == "mid")
             NormalizedLaneName = "mid";
-        if (lane.ToLower() == "bottom" || lane.ToLower() == "bot")
+        if (lane.ToLower() == "bottom" || lane.ToLower() == "bot" || lane.ToLower() == "adc")
             NormalizedLaneName = "adc";
         if (lane.ToLower() == "utility" || lane.ToLower() == "supp" || lane.ToLower() == "support")
             NormalizedLaneName = "supp";
