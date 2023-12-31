@@ -19,4 +19,4 @@ Another functionality implemented is that when the program starts it checks in t
 It also has a cronjob scheduled to repeat this process at 2 am.
 
 # Test It
-You can test and uses this api making an get requisition to http://51.161.70.66:5000/api/ugg/ahri/mid : http://51.161.70.66:5000/api/ugg/{champion}/{lane}
+You can test and uses this api making an get requisition to https://runemaker.igorcoder.tech/swagger/index.html : https://runemaker.igorcoder.tech/api/ugg/{champion}/{lane}
