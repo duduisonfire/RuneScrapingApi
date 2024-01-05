@@ -66,6 +66,9 @@ public class UggRunes : Controller
         {
             var lane = await _championsListCacheSync.GetChampionLane(champion);
 
+            if (lane == "not found")
+                return NotFound("Champion not found.");
+
             var championCache = await _uggDbRepository!.ChampionCacheExists(
                 champion,
                 lane.ToLower()
