@@ -103,7 +103,6 @@ namespace RunesWebScraping.domain
                 { "Adaptive Force", 5008 },
                 { "Attack Speed", 5005 },
                 { "Ability Haste", 5007 },
-                { "Arcane Comet", 8229 },
                 { "Armor", 5002 },
                 { "Health Scaling", 5001 },
                 { "Magic Resist", 5003 },
