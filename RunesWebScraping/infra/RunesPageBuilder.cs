@@ -6,7 +6,7 @@ public class RunesPageBuilder
 {
     public readonly string champion;
     public readonly string lane;
-    public readonly List<IRunePage> listOfRunesId = new();
+    public readonly List<RunePage> listOfRunesId = new();
     public readonly HashSet<List<string>> listOfRunesName = new();
 
     public RunesPageBuilder(List<List<string>> runes, string champion, string lane)
@@ -37,7 +37,7 @@ public class RunesPageBuilder
             }
 
             listOfRunesName.Add(runeList);
-            IRunePage runePage = new RunePage(runeList);
+            RunePage runePage = new(runeList);
             listOfRunesId.Add(runePage);
         }
     }

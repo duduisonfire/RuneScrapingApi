@@ -3,7 +3,7 @@ using RunesWebScraping.domain;
 
 namespace RunesWebScraping.domain
 {
-    public class RunePage : IRunePage
+    public class RunePage
     {
         [BsonElement("runePageTitle")]
         public string RunePageTitle { get; set; }

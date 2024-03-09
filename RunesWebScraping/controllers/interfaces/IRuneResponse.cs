@@ -7,5 +7,5 @@ public interface IRuneResponse
     string Champion { get; set; }
     string Lane { get; set; }
     List<List<string>> Runes { get; set; }
-    List<IRunePage> RunesId { get; set; }
+    List<RunePage> RunesId { get; set; }
 }

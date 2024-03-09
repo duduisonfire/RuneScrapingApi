@@ -9,7 +9,7 @@ namespace RunesWebScraping.controllers
         public string Champion { get; set; }
         public string Lane { get; set; }
         public List<List<string>> Runes { get; set; }
-        public List<IRunePage> RunesId { get; set; }
+        public List<RunePage> RunesId { get; set; }
 
         public RuneResponse(RunesPageBuilder pageBuilder)
         {
