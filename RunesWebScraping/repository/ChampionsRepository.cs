@@ -68,4 +68,19 @@ public class ChampionsRepository : IChampionsRepository
             throw new Exception("Our database is currently experiencing instabilities.");
         }
     }
+
+    public async Task<List<ChampionsLane>> GetAllChampions()
+    {
+        try
+        {
+            var allChampions = await _championsLane.Find(e => true).ToListAsync();
+
+            return allChampions;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw new Exception("Our database is currently experiencing instabilities.");
+        }
+    }
 }

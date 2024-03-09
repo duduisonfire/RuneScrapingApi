@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using RunesWebScraping.cases;
-using RunesWebScraping.controllers.interfaces;
-using RunesWebScraping.domain;
 using RunesWebScraping.infra;
 using RunesWebScraping.repository;
 
