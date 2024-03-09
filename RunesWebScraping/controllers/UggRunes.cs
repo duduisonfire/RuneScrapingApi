@@ -65,6 +65,7 @@ public class UggRunes : Controller
         try
         {
             var lane = await _championsListCacheSync.GetChampionLane(champion);
+            lane = new LaneSanitizer(lane).NormalizedLaneName;
 
             if (lane == "not found")
                 return NotFound("Champion not found.");
