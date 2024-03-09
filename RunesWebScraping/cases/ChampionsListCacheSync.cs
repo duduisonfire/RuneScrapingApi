@@ -1,4 +1,5 @@
 using RunesWebScraping.domain;
+using RunesWebScraping.infra;
 using RunesWebScraping.models;
 using RunesWebScraping.repository;
 
@@ -22,10 +23,11 @@ public class ChampionsListCacheSync : IChampionsListCacheSync
             try
             {
                 var lane = await UggWebScrap.GetChampionLane(champion);
+                var laneSanitizer = new LaneSanitizer(lane);
 
                 var championCache = await _championsRepository.CreateChampionLaneCache(
                     champion,
-                    lane
+                    laneSanitizer.NormalizedLaneName
                 );
                 Console.WriteLine($"The Champions Cache of {champion} are created.");
 
