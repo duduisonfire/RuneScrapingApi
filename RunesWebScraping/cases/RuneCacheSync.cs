@@ -26,12 +26,6 @@ public class RuneCacheSync : IRuneCacheSync
                 var webScrap = new UggWebScrap(champion, lane);
                 var runes = await webScrap.GetRunes();
                 var pageBuilder = new RunesPageBuilder(runes, champion, lane);
-                var runesId = new List<RunePage>();
-
-                for (int i = 0; i < pageBuilder.listOfRunesId.Count; i++)
-                {
-                    runesId.Add(pageBuilder.listOfRunesId[i]);
-                }
 
                 var runeResponse = new RuneResponse(pageBuilder);
 

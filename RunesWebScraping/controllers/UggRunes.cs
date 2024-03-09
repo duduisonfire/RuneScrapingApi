@@ -13,11 +13,17 @@ public class UggRunes : Controller
 {
     private readonly IUggRepository _uggDbRepository;
     private readonly IChampionsListCacheSync _championsListCacheSync;
+    private readonly IRuneCacheSync _runeCacheSync;
 
-    public UggRunes(IUggRepository uggRepository, IChampionsListCacheSync champions)
+    public UggRunes(
+        IUggRepository uggRepository,
+        IChampionsListCacheSync champions,
+        IRuneCacheSync runeCacheSync
+    )
     {
         _uggDbRepository = uggRepository;
         _championsListCacheSync = champions;
+        _runeCacheSync = runeCacheSync;
     }
 
     [HttpGet("{champion}/{lane}")]
@@ -26,29 +32,20 @@ public class UggRunes : Controller
         try
         {
             var championLane = await _championsListCacheSync.GetChampionLane(champion);
-            lane = new LaneSanitizer(lane).NormalizedLaneName;
 
             if (championLane == "not found")
                 return NotFound("Champion not found.");
+
+            lane = new LaneSanitizer(lane).NormalizedLaneName;
+
             if (lane == "not found")
-                lane = championLane;
+                return BadRequest("Incorrect Lane Name.");
 
             var championCache = await _uggDbRepository!.ChampionCacheExists(champion, lane);
 
             if (championCache == null)
             {
-                var webScrap = new UggWebScrap(champion, lane);
-                var runes = await webScrap.GetRunes();
-                var pageBuilder = new RunesPageBuilder(runes, champion, lane);
-                var runesId = new List<RunePage>();
-
-                for (int i = 0; i < pageBuilder.listOfRunesId.Count; i++)
-                {
-                    runesId.Add(pageBuilder.listOfRunesId[i]);
-                }
-
-                IRuneResponse runeResponse = new RuneResponse(pageBuilder);
-                championCache = await _uggDbRepository.CreateChampionCache(runeResponse);
+                await _runeCacheSync.UpdateChampionCache(champion, lane);
             }
 
             return Ok(championCache);
@@ -65,10 +62,11 @@ public class UggRunes : Controller
         try
         {
             var lane = await _championsListCacheSync.GetChampionLane(champion);
-            lane = new LaneSanitizer(lane).NormalizedLaneName;
 
             if (lane == "not found")
                 return NotFound("Champion not found.");
+
+            lane = new LaneSanitizer(lane).NormalizedLaneName;
 
             var championCache = await _uggDbRepository!.ChampionCacheExists(
                 champion,
@@ -77,18 +75,7 @@ public class UggRunes : Controller
 
             if (championCache == null)
             {
-                var webScrap = new UggWebScrap(champion, lane);
-                var runes = await webScrap.GetRunes();
-                var pageBuilder = new RunesPageBuilder(runes, champion, lane);
-                var runesId = new List<RunePage>();
-
-                for (int i = 0; i < pageBuilder.listOfRunesId.Count; i++)
-                {
-                    runesId.Add(pageBuilder.listOfRunesId[i]);
-                }
-
-                var runeResponse = new RuneResponse(pageBuilder);
-                championCache = await _uggDbRepository.CreateChampionCache(runeResponse);
+                await _runeCacheSync.UpdateChampionCache(champion, lane);
             }
 
             return Ok(championCache);
