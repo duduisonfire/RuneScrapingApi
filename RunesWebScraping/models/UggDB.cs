@@ -22,7 +22,7 @@ namespace RunesWebScraping.models
         public List<List<string>> Runes { get; set; }
 
         [BsonElement("runesId")]
-        public List<RunePage> RunesId { get; set; }
+        public List<IRunePage> RunesId { get; set; }
 
         [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
