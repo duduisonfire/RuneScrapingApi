@@ -3,6 +3,9 @@
 This program is an API to get the best League of Legends champion runes according to u.gg.
 If you are making an League of Legends app you can use this API to get the runes formatted to use in Lol Client Api.
 
+# Disclaimer
+Due to the fact that riot forces vanguard and LoL will probably stop working on Linux, this project has lost its meaning for me, I leave here my protests against riot. This implies that the server that hosted this API has been shut down, you can still use the code and host it if you want.
+
 # Explanation of how it works
 This API consists of a controller that receives the champion and the lane to be played and returns the set of runes.
 
